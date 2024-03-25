@@ -53,19 +53,21 @@
     : "btn capitalize btn-secondary";
   $: showNoSpeechSupport = !isSpeechSynthesisSupported;
 
-  message.onend = () => {
-    const step = $steps[currentStep];
-    $startClock = true;
-    seconds.set(step.duration);
-    if (running) {
-      setTimeout(() => {
-        currentStep++;
-      }, 1000 * step.duration);
-    } else {
-      $startClock = false;
-    }
-  };
-  
+  if (message) {
+    message.onend = () => {
+      const step = $steps[currentStep];
+      $startClock = true;
+      seconds.set(step.duration);
+      if (running) {
+        setTimeout(() => {
+          currentStep++;
+        }, 1000 * step.duration);
+      } else {
+        $startClock = false;
+      }
+    };
+  }
+
   $: if (running) {
     const step = $steps[currentStep];
     if (step) {
@@ -77,16 +79,15 @@
       speechSynthesis.speak(message);
     } else {
       running = false;
-      message.text = "workout complete! congratulations!"
+      message.text = "workout complete! congratulations!";
       message.rate = 1;
       message.pitch = 1;
       message.volume = 1;
       message.lang = "en-US";
       speechSynthesis.speak(message);
-      currentStep = 0
+      currentStep = 0;
     }
   }
-
 </script>
 
 <div class="container p-6">
