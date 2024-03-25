@@ -16,8 +16,8 @@ export default defineConfig({
         skipWaiting: true,
       },
       manifest: {
-        name: "Jesus Christ - true passover lamb",
-        short_name: "True Passover Lamb",
+        name: "HIIT Timer",
+        short_name: "HIIT Timer",
         start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
