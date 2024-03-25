@@ -21,6 +21,8 @@
   }
 
   $: color = $countdown < 10 ? "text-red-600" : "text-green-600";
+  $: console.log(`$startClock`, $startClock)
+  $: console.log(`$seconds`, $seconds)
 </script>
 
 <div>

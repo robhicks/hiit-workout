@@ -29,8 +29,9 @@
     running = false;
   }
 
-  function add() {
-    steps.update((s) => [...s, { duration: 30, name: "", id: uuid() }]);
+  async function add() {
+    const step = { duration: 30, name: "", id: uuid() }
+    steps.update((items) => [...items, step])
   }
 
   function handleDndConsider(e) {
@@ -88,6 +89,7 @@
       currentStep = 0;
     }
   }
+
 </script>
 
 <div class="container p-6">
