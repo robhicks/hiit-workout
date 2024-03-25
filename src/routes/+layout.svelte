@@ -6,6 +6,8 @@
 
   $: webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : "";
 
+  console.log(`webManifestLink`, webManifestLink)
+
 </script>
 
 <svelte:head>
@@ -13,8 +15,8 @@
     name="description"
     content="HIIT workout timer with voice guidance."
   />
-  <link rel="apple-touch-icon" href="/512x512.svg" sizes="180x180" />
-  <link rel="mask-icon" href="/512x512.svg" color="#FFFFFF" />
+  <link rel="apple-touch-icon" href="/icon-512x512.svg" sizes="180x180" />
+  <link rel="mask-icon" href="/icon-512x512.svg" color="#FFFFFF" />
   <meta name="theme-color" content="#ffffff" />
   <title>HIIT Me!</title>
   {@html webManifestLink}
