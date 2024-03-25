@@ -16,8 +16,11 @@ export default defineConfig({
         skipWaiting: true,
       },
       manifest: {
-        name: "HIIT Timer",
-        short_name: "HIIT Timer",
+        name: "HIIT Workout Assistant",
+        description: "A simple HIIT workout assistant",
+        short_name: "HIIT Workout Assistant",
+        id: "com.herokuapp.hiit-workout-assistant",
+        orientation: "portrait",
         start_url: "/",
         display: "standalone",
         background_color: "#ffffff",
