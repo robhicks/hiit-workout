@@ -1,24 +1,11 @@
-import { browser } from '$app/environment'
-import { get, writable } from 'svelte/store'
-import { get as getDb, set } from 'idb-keyval'
-import { isArray, isEmpty, isNotEmpty } from './is'
+import { syncedStore, getYjsDoc  } from "@syncedstore/core";
+import { svelteSyncedStore } from "@syncedstore/svelte";
+import { IndexeddbPersistence } from "y-indexeddb";
 
-export const steps = writable([])
-const key = 'steps'
+const stepsStore = syncedStore({steps: []})
 
-if (browser) {
-  getDb(key).then((value) => {
-    if (isNotEmpty(value) && isArray(value)) {
-      const stps = get(steps)
-      if (isEmpty(stps)) {
-        steps.set(value)
-      } 
-    }
-  })
+const doc = getYjsDoc(stepsStore);
 
-  steps.subscribe((value) => {
-    if (isNotEmpty(value) && isArray(value)) {
-      set(key, value)
-    }
-  })
-}
+export const store = svelteSyncedStore(stepsStore)
+
+const provider = new IndexeddbPersistence("hiit-workout", doc);

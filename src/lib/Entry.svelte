@@ -1,12 +1,14 @@
 <script>
   import { mdiDragVertical, mdiTrashCanOutline } from '@mdi/js';
+  import { store } from '$lib/store'
   import Icon from './Icon.svelte'
   export let step
-  export let steps
 
   function remove() {
-    steps.update((s) => s.filter((st) => st.id !== step.id));
+    const index = $store.steps.findIndex((s) => s.id === step.id)
+    $store.steps.splice(index, 1)
   }
+  
 </script>
 
 <div class="flex items-center gap-2 mb-2">
