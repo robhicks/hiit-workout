@@ -17,7 +17,7 @@ if (browser) {
   })
 
   steps.subscribe((value) => {
-    if (isNotEmpty(value) && isArray(value)) {
+    if (isArray(value)) {
       set(key, value)
     }
   })

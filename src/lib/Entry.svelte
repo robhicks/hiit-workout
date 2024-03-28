@@ -3,6 +3,7 @@
   import Icon from './Icon.svelte'
   export let step
   export let steps
+  console.log(`$steps`, $steps)
 
   function remove() {
     steps.update((s) => s.filter((st) => st.id !== step.id));

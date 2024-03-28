@@ -3,18 +3,15 @@
   import { browser } from "$app/environment";
   import { pwaInfo } from "virtual:pwa-info";
   import ReloadPrompt from "../lib/ReloadPrompt.svelte";
+  
 
   $: webManifestLink = pwaInfo ? pwaInfo.webManifest.linkTag : "";
 
-  console.log(`webManifestLink`, webManifestLink)
-
+  // console.log(`webManifestLink`, webManifestLink);
 </script>
 
 <svelte:head>
-  <meta
-    name="description"
-    content="HIIT workout timer with voice guidance."
-  />
+  <meta name="description" content="HIIT workout timer with voice guidance." />
   <link rel="apple-touch-icon" href="/icon-512x512.svg" sizes="180x180" />
   <link rel="mask-icon" href="/icon-512x512.svg" color="#FFFFFF" />
   <meta name="theme-color" content="#ffffff" />

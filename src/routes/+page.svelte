@@ -7,12 +7,15 @@
   import { v4 as uuid } from "uuid";
   import { dndzone } from "svelte-dnd-action";
   import Clock from "$lib/Clock.svelte";
+  import CopyPaste from "$lib/CopyPaste.svelte";
 
   let currentStep = 0;
   let running = false;
   const message = isSpeechSynthesisSupported && new SpeechSynthesisUtterance();
   const startClock = writable(false);
   const seconds = writable(0);
+
+  let day = 1;
 
   const flipDurationMs = 300;
 
@@ -30,7 +33,7 @@
   }
 
   async function add() {
-    const step = { duration: 30, name: "", id: uuid() }
+    const step = { duration: 30, name: "", id: uuid(), day }
     steps.update((items) => [...items, step])
   }
 
@@ -90,23 +93,34 @@
     }
   }
 
+  $: filteredSteps = $steps.filter((step) => step.day === day);
+
+  $: console.log(`filteredSteps`, filteredSteps)
+
 </script>
 
 <div class="container p-6">
-  <h1 class="text-3xl flex items-center gap-3 text-center md:text-left">
+  <h1 class="text-3xl flex items-center gap-1">
     HIIT Workout Assistant
+    <CopyPaste />
   </h1>
   <p class="mb-6">
     This is a simple HIIT workout assistant. It will guide you through a workout
     with voice prompts. You can set the duration of the workout and the duration
     of the rest periods.
   </p>
+
+  <select class="select select-bordered w-full mb-2" bind:value={day}>
+  <option disabled selected>Pick Day</option>
+  <option value={1} >First Day</option>
+  <option value={2}>Second Day</option>
+</select >
   <section
     use:dndzone={{ items: $steps, flipDurationMs }}
     on:consider={handleDndConsider}
     on:finalize={handleDndFinalize}
   >
-    {#each $steps as step (step.id)}
+    {#each filteredSteps as step (step.id)}
       <Entry bind:step {steps} />
     {/each}
   </section>
