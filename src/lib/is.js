@@ -1,3 +1,5 @@
+import { browser } from '$app/environment'
+
 export const isBoolean = (value) => typeof value === 'boolean'
 
 export const isFunction = (value) => typeof value === 'function'
@@ -122,3 +124,5 @@ export const isMobileDevice = (includeTablets) => {
 }
 
 export const isSpeechSynthesisSupported = hasWindow && 'speechSynthesis' in window
+
+export const isDarkMode = browser && window.matchMedia('(prefers-color-scheme: dark)').matches

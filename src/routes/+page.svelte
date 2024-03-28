@@ -73,7 +73,7 @@
   }
 
   $: if (running) {
-    const step = $steps[currentStep];
+    const step = filteredSteps[currentStep];
     if (step) {
       message.text = `start ${step.name} for ${step.duration} seconds`;
       message.rate = 1;
